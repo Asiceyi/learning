@@ -1,2 +1,0 @@
-# learning
-work hard
