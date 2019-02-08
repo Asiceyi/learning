@@ -1,0 +1,67 @@
+Position Find(List L, ElementType X) {
+	int i;
+	if (L == NULL) {
+		return ERROR;
+	}
+	for (i = 0; L !=NULL; i++) {
+		if (X == L->Data) {
+			return L;
+		}
+		L = L->Next;
+	}
+	return ERROR;
+}
+
+List Insert(List L, ElementType X, Position P) {
+	List head;
+	head = L;
+	List temp;
+	temp = (List)malloc(sizeof(List));
+	temp->Data = X;
+	if (P == L) {
+		temp->Next = L;
+		return temp;
+	}
+	else {
+		while (L->Next != P && L->Next != NULL) {
+			L = L->Next;
+		}
+		if (L->Next == NULL && P != NULL) {
+			printf("Wrong Position for Insertion\n");
+			return ERROR;
+		}
+		else {
+			L->Next = temp;
+			temp->Next = P;
+			return head;
+		}
+	}
+}
+
+List Delete(List L, Position P) {
+	List head;
+	head = L;
+	if (L == NULL || P == NULL) {
+		printf("Wrong Position for Deletion\n");
+		return ERROR;
+	}
+	else {
+		if (P == L) {
+			head = L->Next;
+			return head;
+		}
+		else {
+			while (L->Next != P && L->Next != NULL) {
+				L = L->Next;
+			}
+			if (L->Next == NULL) {
+				printf("Wrong Position for Deletion\n");
+				return ERROR;
+			}
+			else {
+			L->Next = L->Next->Next;
+				return head;
+			}
+		}
+	}
+}
