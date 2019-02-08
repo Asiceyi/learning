@@ -1,0 +1,12 @@
+ElementType FindKth(List L, int K) {
+	if (L == NULL) return ERROR;
+	int i = 1;
+	while (i != K) {
+		if (L->Next == NULL) {
+			return ERROR;
+		}
+		L = L->Next;
+		i++;
+	}
+	return L->Data;
+}
