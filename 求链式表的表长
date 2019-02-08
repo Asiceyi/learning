@@ -1,0 +1,13 @@
+int Length(List L) {
+	int n = 0;
+	if (L == NULL) {
+	  n=0;
+	}
+	else {
+		while (L) {
+			n++;
+			L = L->Next;
+		}
+	}
+	return n;
+}
