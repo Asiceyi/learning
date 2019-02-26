@@ -1,0 +1,24 @@
+#include <stdio.h>
+int main() {
+	int num, times, ret;
+	scanf("%d %d", &num, &times);
+	int i, a[num], j;
+	for (i = 0; i < num; i++) {
+		scanf("%d", &a[i]);
+	};
+	for (j = 0, ret = a[0]; j < times; j++, ret = a[0]) {
+		for (i = 0; i < num - 1; i++) {
+			a[i] = a[i + 1];
+		}
+		a[num - 1] = ret;
+	}
+	for (i = 0; i < num; i++) {
+		if (i == 0) {
+			printf("%d", a[i]);
+		}
+		else {
+			printf(" %d", a[i]);
+		}
+	}
+	return 0;
+}
