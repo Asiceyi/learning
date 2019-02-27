@@ -1,0 +1,23 @@
+List Insert(List L, ElementType X) {
+	List head = L;
+	List q = head;
+	L = L->Next;
+	List p = (List)malloc(sizeof(struct Node));
+	p->Data = X;
+	p->Next = NULL;
+	if (L == NULL) {
+		head->Next = p;
+		return head;
+	}
+	while (L->Data < X) {
+		q = L;
+		L = L->Next;
+		if (L->Next == NULL) {
+			L->Next = p;
+			return head;
+		}
+	}
+	p->Next = L;
+	q->Next = p;
+	return head;
+}
