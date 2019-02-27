@@ -1,0 +1,24 @@
+List Merge(List L1, List L2) {
+	if (L1 == NULL && L2 == NULL) {
+		return NULL;
+	}
+	List L = (List)malloc(sizeof(struct Node));
+	List p, q, m;
+	p = L1->Next, q = L2->Next, m = L;
+	while (p&&q) {
+		if (p->Data >= q->Data) {
+			m->Next = q;
+			q = q->Next;
+		}
+		else {
+			m->Next = p;
+			p = p->Next;
+		}
+		m = m->Next;
+	}
+	if (p) m->Next = p;
+	else if (q) m->Next = q;
+	L1->Next = NULL;
+	L2->Next = NULL;
+	return L;
+}
