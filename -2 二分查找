@@ -1,0 +1,45 @@
+【习题1.8】-2 二分查找 （15 分）
+已有一个10个元素的整形数组a，且按值从小到大有序。输入一个整数x，然后在数组中查找x，如果找到，输出相应的下标，否则，输出"Not Found"。。 要求编写函数int Bsearch(int *p, int n, int x)，找到返回下标，找不到返回-1。
+
+函数接口定义：
+
+int Bsearch(int *p, int n, int x);
+其中 p是数组首地址，n是数组元素个数，x是要查找的值。找到返回下标，找不到返回-1。
+
+裁判测试程序样例：
+
+# include<stdio.h>
+int Bsearch(int *p, int n, int x);     
+int main(void)   
+{
+    int a[10] = {1,2,3,4,5,6,7,8,9,10};    
+    int x, m;
+    scanf("%d",&x);                
+    m = Bsearch(a, 10, x);
+    if(m >= 0)   
+        printf("Index is %d\n",m);
+    else 
+        printf( "Not Found\n");
+		
+    return 0;
+}
+
+/* 请在这里填写答案 */
+
+int Bsearch(int *p, int n, int x) {
+	int i;
+	int left=0, right=9, mid;
+	while (left <= right) {
+		mid = (left + right) / 2;
+		if (x == p[mid]) {
+			return mid;
+		}
+		else if(x>mid){
+			left = mid + 1;
+		}
+		else {
+			right = right - 1;
+		}
+	}
+	return -1;
+}
