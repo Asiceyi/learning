@@ -1,0 +1,25 @@
+#include <stdio.h>
+int max(int A[], int N);
+int main(){
+	int n, i,sum;
+	scanf("%d", &n);
+	int a[n];
+	for (i = 0; i < n; i++) {
+		scanf("%d", &a[i]);
+	}
+	sum=max( a,  n);
+	printf("%d", sum);
+}
+int max(int A[], int N) {
+	int thissum, maxsum = 0;
+	int i, j ;
+	for (i = 0; i < N; i++) {
+		thissum = 0;
+		for (j = i; j < N; j++) {
+			thissum += A[j];
+			if (thissum > maxsum)
+				maxsum = thissum;
+		}
+	}
+	return maxsum;
+}
