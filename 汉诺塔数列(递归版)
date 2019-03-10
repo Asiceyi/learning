@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+// 汉诺塔数列(递归版)
+double NumHanoi(int index);
+
+int main()
+{
+	int i;
+	scanf("%d", &i);
+	printf("%g\n", NumHanoi(i));
+	return 0;
+}
+
+/* 你提交的代码将被嵌在这里 */
+
+
+double NumHanoi(int index)
+{
+	if (index <= 0) {
+		return 0;
+	}
+	else if (index == 1) {
+		return 1;
+	}
+	else {
+		return 2*NumHanoi(index - 1)+1;
+	}
+}
