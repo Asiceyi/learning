@@ -1,0 +1,46 @@
+#include <stdio.h>
+void bird(int k);
+int Num(int x);
+int main() {
+	int Q;
+	scanf("%d", &Q);
+	int i = 0, k;
+	for (; i < Q; i++) {
+		scanf("%d", &k);
+		bird(k);
+	}
+	return 0;
+}
+
+void bird(int k) {
+	int i = 0, n = 0,j=-1;
+	if (k == 1) {
+		printf("1\n");
+		return;
+	}
+	while (i != k) {
+		n++;
+		j = n;
+		while (1) {
+			j = Num(j);
+			if (j == 4) {
+				break;
+			}
+			if (j == 1) {
+				i++;
+				break;
+			}
+		}
+	}
+	printf("%d", n);
+}
+
+int Num(int x)
+{
+	int ret = 0;
+	while (x) {
+		ret += (x % 10)*(x % 10);
+		x /= 10;
+	}
+	return ret;
+}
