@@ -1,0 +1,58 @@
+List MakeEmpty()
+{
+  List l =(List )malloc(sizeof(struct LNode));
+  l->Last=-1;
+  return l;
+}
+Position Find( List L, ElementType X )
+{
+  for(int i=0;i<=L->Last;i++)
+  {
+    if(L->Data[i]==X)
+    {
+      return i;
+    }
+  }
+  return ERROR;
+}
+bool Insert( List L, ElementType X, Position P )
+{
+  if(L->Last==MAXSIZE-1)
+  {
+    printf("FULL");
+    return false;
+  }
+  else if(P<0 || P>L->Last+1) //插入只能插【0，last+1】才能保证顺序表的连续
+  {
+    printf("ILLEGAL POSITION");
+    return false;
+  }
+  else 
+  {
+    for(int i=L->Last;i>=P;i--)
+    {
+      L->Data[i+1]=L->Data[i];
+    }
+    L->Data[P]=X;
+    L->Last++;
+    return true;
+  }
+}
+bool Delete( List L, Position P )
+{
+  if(P<0||P>L->Last)
+  {
+    printf("POSITION %d EMPTY",P);
+    return false;
+  }
+  else 
+  
+  {
+    for(int i=P;i<L->Last;i++)
+    {
+      L->Data[i]=L->Data[i+1];
+    }
+    L->Last--;
+    return true;
+  }
+}
