@@ -1,0 +1,65 @@
+bool ListInsert(SqList &L, int i, ElemType e)
+{
+	
+	if ( i<1 || i>L.length+1 ) /*顺序线性表已经满*//*当i不在范圈内*/
+	{
+		return false;
+	}
+	
+	if (i <L.length)        /*若插入数据位置不在表尾*/
+	{
+		for (int k = L.length; k > i - 1; --k)
+		{
+			L.data[k + 1] = L.data[k];
+		}
+	}
+		L.data[i-1] = e;
+		++L.length;
+		if (L.length == L.capacity)
+		{
+			L.data = (ElemType *)realloc(L.data, sizeof(ElemType)*L.capacity + sizeof(ElemType)*Add_Capacity);
+ 
+			L.capacity += Add_Capacity;
+		}
+	
+	return true;
+}
+
+
+bool ListDelete(SqList *&L,int i,ElemType &e)  //删除第i个元素
+{
+    int j;
+    if (i<1 || i>L->length)
+        return false;
+    i--;                        //将顺序表位序转化为elem下标
+    e=L->data[i];
+    for (j=i;j<L->length-1;j++) //将data[i]之后的元素前移一个位置
+        L->data[j]=L->data[j+1];
+    L->length--;                //顺序表长度减1
+    return true;
+}
+
+bool ListDelectElem(SqList &L, ElemType e)
+{
+	if (L.length == 0)
+	{
+		return false;
+	}
+	
+	for (int i = 1; i<=L.length; ++i)
+	{
+		if (L.data[i] == e)
+		{
+			if (i < L.length)
+			{
+				for (int k = i; k <L.length; ++k)
+				{
+					L.data[k - 1] = L.data[k];
+				}
+			}
+			L.length--;
+			return true;
+		}
+	}
+	return false;
+}
