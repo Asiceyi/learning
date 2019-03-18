@@ -1,0 +1,28 @@
+void DispList(DLinkNode *L)
+{
+	DLinkNode *p = L->next;
+	while (p != NULL)
+	{
+		printf("%c",p->data);
+		p = p->next;
+	}
+}
+
+int Symm(DLinkNode *L) {
+	if (L == NULL) {
+		return -1;
+	}
+	DLinkNode *l, *r;
+	l = L->prior;
+	r = L->next;
+	while (l != r) {
+		if (l->data!= r->data) {
+			return 0;
+		}
+		else {
+			l = l->prior;
+			r = r->next;
+		}
+	}
+	return 1;
+}
