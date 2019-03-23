@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <malloc.h>
+#define MaxSize 10000
+typedef char ElemType;
+typedef struct 
+{
+	ElemType data[MaxSize];
+   	int length;
+} SqList;
+void InitList(SqList *&L);	//初始化线性表
+void DispList(SqList *L);
+bool ListInsert(SqList *&L,int i,ElemType e);
+bool ListDelete(SqList *&L,int i,ElemType &e);
+bool ListDeleteElem(SqList *&L,ElemType e);
+
+int main()
+{
+	SqList *L;
+	ElemType e,ch;
+	int i=1;
+	InitList(L);
+	while((ch=getchar())!='\n')
+	{
+		ListInsert(L,i,ch);  //在L的第i个元素位置上插入ch
+		i++;
+	}
+	scanf("\n%d",&i);	
+   	if(ListDelete(L,i,e)) // 删除L的第i个元素
+	{
+		printf("delete %c: ",e);
+		DispList(L);
+	}
+	scanf("\n%c",&e);		
+     if(ListDeleteElem(L,e)) // 删除L的元素e
+	DispList(L);
+}
+void InitList(SqList *&L)	//初始化线性表  .由裁判程序实现。略去不表。
+{
+}
+
+void DispList(SqList *L)   //输出顺序表,每个结点之间空格符间隔。.略去不表。
+{
+}
+
+bool ListInsert(SqList *&L,int i,ElemType e)    //在顺序表第i个位置上插入一个结点，插入成功时，返回true, 否则返回false . 由裁判程序实现。略去不表
+{
+
+}
+
+/* 请在这里填写答案 */
+
+
+bool ListDelete(SqList *&L, int i, ElemType &e) {
+	if (i<1 || i>L->length||L==NULL)
+		return false;
+	i--;
+	e = L->data[i];
+	for (int j = i; j < L->length - 1 ; j++) {
+		L->data[j] = L->data[j + 1];
+	}
+	L->length--;
+	return true;
+}
+
+
+bool ListDeleteElem(SqList *&L, ElemType e) {
+	if (L == NULL) {
+		return false;
+	}
+	int k = 0, i, mark = 0;
+	for (i = 0; i < L->length; i++) {
+		if (L->data[i] != e) {
+			L->data[k] = L->data[i];
+			k++;
+		}
+		if (L->data[i] == e)
+			mark = 1;
+	}
+	L->length = k;
+	if (mark == 0) {
+		return false;
+	}
+	return true;
+}
