@@ -1,0 +1,32 @@
+bool ListInsert(LinkList *&L, int i, ElemType e) {//将元素e插入在L的第i个结点处，i为结点的逻辑序号，i的取值在【1，L->Length+1】范围内时，可成功插入，返回true, 否则插入失败，返回false。
+	if (i < 1) {
+		return false;
+	}
+	int j = 0;
+	LinkList*p = L, *s;
+	if (i < 1) return    false;
+	while (j < i-1  && p) {
+		j++; p = p->next;
+	}
+	if (p == NULL) return false;
+	else {
+		s = (LinkList*)malloc(sizeof(LinkList));
+		s->data = e;
+		s->next = p->next;
+		p->next = s;
+	}
+	return true;
+}
+
+void DispListN(LinkList *L, int n) {//输出第n个结点值。 n为结点的逻辑序号。如果n不在链表长度范围，则输出结点值用NULL表示。
+	int i = 0;
+	LinkList *p = L->next;
+	if (n < 1) {printf("The %dth is NULL",n);return ;}
+	while (i < n - 1 && p) {
+		i++; p = p->next;
+	}
+	if (p == NULL) printf("The %dth is NULL", n);
+	else {
+		printf("The %dth is %c", n, p->data);
+	}
+}
