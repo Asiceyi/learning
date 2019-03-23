@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <malloc.h>
+typedef char ElemType;
+typedef struct LNode  		//定义单链表结点类型
+{
+	ElemType data;
+	struct LNode *next;		//指向后继结点
+} LinkList;
+
+LinkList * CreateListF(LinkList *L,ElemType a[],int n);//头插法建立单链表。
+LinkList * CreateListR(LinkList *L,ElemType a[],int n);//尾插法建立单链表。
+void DispList(LinkList *L); //输出单链表所有结点值，每个结点之间用空格间隔，如果链表为空，则输出NULL。全部输出用换行符结束。 
+void SetListNULL(LinkList *L);//删除链表所有数据结点,将链表置为空表。 裁判程序实现。
+
+int main()
+{
+	LinkList *L, *ha,*hb;
+	ElemType a[100]={0};
+	int i=0;
+	char ch;
+	while((ch=getchar())!='\n')
+	{
+		a[i++]=ch;
+	}		
+	ha=CreateListR(L,a,i);
+	hb=CreateListF(L,a,i);
+	printf("A: ");DispList(ha);
+	printf("B: ");DispList(hb);
+        SetListNULL(ha);
+	SetListNULL(hb);
+	printf("A: ");DispList(ha);
+	printf("B: ");DispList(hb);	
+	return 0;
+}
+
+void SetListNULL(LinkList *L);// 裁判程序实现，细节不表。删除链表所有数据结点,将链表置为空表。
+{
+...
+}
+
+/* 请在这里填写答案 */
+
+
+LinkList *  CreateListF(LinkList *L, ElemType a[], int n){//用数组元素值头插法建立单链表，返回单链表头结点指针。
+	LinkList *s;
+	L = (LinkList*)malloc(sizeof(LinkList));
+	L->next = NULL;
+	for (int i = 0; i < n; i++) {
+		s = (LinkList*)malloc(sizeof(LinkList));
+		s->data = a[i];
+		s->next = L->next;
+		L->next = s;
+	}
+	return L;
+}
+
+
+LinkList *  CreateListR(LinkList *L, ElemType a[], int n) {//用数组元素值尾插法建立单链表，返回单链表头结点指针。
+	LinkList *s, *r;
+	L = (LinkList*)malloc(sizeof(LinkList));
+	r = L;
+	for (int i = 0; i < n; i++) {
+		s = (LinkList*)malloc(sizeof(LinkList));
+		s->data = a[i];
+		r->next = s;
+		r = s;
+	}
+	r->next = NULL;
+	return L;
+}
+
+
+void DispList(LinkList *L) {  //输出单链表所有结点，如果链表为空，则输出NULL
+	L = L->next;
+	if (L == NULL) {
+		printf("NULL\n");
+		return;
+	}
+	while (L) {
+		printf("%c ", L->data);
+		L = L->next;
+	}
+	printf("\n");
+	return ;
+}
+
+
+
