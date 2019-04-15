@@ -1,0 +1,146 @@
+#include <stdio.h>
+#define MaxSize 100 
+typedef struct
+{   char data[MaxSize]; 
+    int length;
+} SqString;
+void StrAssign(SqString &str,char cstr[]);
+SqString Concat(SqString s,SqString t);
+SqString SubStr(SqString s,int i,int j);
+SqString InsStr(SqString s1,int i,SqString s2);
+SqString DelStr(SqString s,int i,int j);
+SqString RepStr(SqString s,int i,int j,SqString t);
+void DispStr(SqString str); 
+int main()
+{
+	SqString s,s1,s2,s3,s4,s5,s6;
+	char str[100]={0};
+	int m,n,i=0;
+        while((str[i]=getchar())!='\n') 
+	    i++;
+        str[i]='\0';
+	StrAssign(s,str);
+         i=0;
+        while((str[i]=getchar())!='\n')
+	    i++;
+        str[i]='\0';
+	StrAssign(s1,str);
+	printf("s: ");DispStr(s);
+	printf("s1: ");DispStr(s1);
+	//在串s的第m个字符位置插入串s1而产生串s2 
+	scanf("\n%d",&m);
+	s2=InsStr(s,m,s1);  
+	printf("s2: ");DispStr(s2);
+	//删除串s第m个字符开始的n个字符而产生串s3
+	scanf("\n%d%d",&m,&n);
+	s3=DelStr(s,m,n);  
+	printf("s3: ");DispStr(s3);
+	//将串s第m个字符开始的n个字符替换成串s1而产生串s4\n");
+	scanf("\n%d%d",&m,&n);
+	s4=RepStr(s,m,n,s1);
+	printf("s4: ");DispStr(s4);
+	//提取串s的第m个字符开始的n个字符而产生串s5\n");
+	scanf("\n%d%d",&m,&n);
+	s5=SubStr(s,m,n);
+	printf("s5: ");DispStr(s5);
+	//将串s1和串s2连接起来而产生串s6\n");
+	s6=Concat(s1,s2);
+	printf("s6: ");DispStr(s6);
+	return 0;
+}
+void DispStr(SqString s)
+{	int i;
+	if (s.length>0)
+	{	for (i=0;i<s.length;i++)
+			printf("%c",s.data[i]);
+	}
+	printf("\n");
+}
+
+/* 请在这里填写答案 */
+
+void StrAssign(SqString &str, char cstr[]) {
+	int i;
+	for (i = 0; cstr[i] != '\0'; i++) {
+		str.data[i] = cstr[i];
+	}
+	str.length = i;
+}
+
+SqString Concat(SqString s, SqString t) {
+	SqString str;
+	int i;
+	str.length = s.length + t.length;
+	for (i = 0; i < s.length; i++) {
+		str.data[i] = s.data[i];
+	}
+	for (i = 0; i < t.length; i++) {
+		str.data[i + s.length] = t.data[i];
+	}
+	return str;
+}
+SqString SubStr(SqString s, int i, int j) {//自己写的
+	SqString str;
+	int k = 0;
+	str.length = 0;
+	int ret = i;
+	if (i <= 0 || i > s.length || i + j - 1 > s.length)
+		return str;
+	for (k = 0; i < ret + j ; i++, k++) {
+		str.data[k] = s.data[i-1];
+	}
+	str.length = j;
+	return str;
+}
+
+SqString InsStr(SqString s1, int i, SqString s2) {
+	SqString str;
+	str.length = 0;
+	int j;
+	if (i <= 0 || i > s1.length + 1)
+		return str;
+	for (j = 0; j < i - 1; j++) {
+		str.data[j] = s1.data[j];
+	}
+	for (j = 0; j < s2.length; j++) {
+		str.data[j + i - 1] = s2.data[j];
+	}
+	for (j = i - 1; j < s1.length; j++) {
+		str.data[j+s2.length] = s1.data[j];
+	}
+	str.length = s1.length + s2.length;
+	return str;
+}
+SqString DelStr(SqString s, int i, int j) {
+	SqString str;
+	str.length = 0;
+	if (i <= 0 || i > s.length || i + j - 1 > s.length)
+		return str;
+	int k;
+	for (k = 0; k < i-1; k++) {
+		str.data[k] = s.data[k];
+	}
+	for (k = i + j - 1; k < s.length; k++,i++) {
+		str.data[i - 1] = s.data[k];
+	}
+	str.length = s.length - j;
+	return str;
+}
+SqString RepStr(SqString s, int i, int j, SqString t) {
+	SqString str;
+	int k;
+	str.length = 0;
+	if (i <= 0 || i > s.length || i + j - 1 > s.length)
+		return str;
+	for (k = 0; k < i - 1; k++) {
+		str.data[k] = s.data[k];
+	}
+	for (k = 0; k < t.length; k++) {
+		str.data[i + k - 1] = t.data[k];
+	}
+	for (k = i + j - 1; k < s.length; k++) {
+		str.data[t.length + k - j] = s.data[k];
+	}
+	str.length = s.length - j + t.length;
+	return str;
+}
