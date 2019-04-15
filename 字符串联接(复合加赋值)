@@ -1,0 +1,31 @@
+
+#include <stdio.h>
+
+// 字符串联接(复合加赋值)
+char* StrCat(char *dst, const char *src);
+
+int main()
+{
+	char a[1024], b[1024], c[1024];
+	gets(a);
+	gets(b);
+	gets(c);
+	StrCat(a, StrCat(b, c));
+	puts(a);
+	puts(b);
+	puts(c);
+	return 0;
+}
+
+/* 你提交的代码将被嵌在这里 */
+
+char* StrCat(char *dst, const char *src) {
+	int i, j;
+	for (i = 0; dst[i] != '\0'; i++) {
+	}
+	for (j = 0; src[j] != '\0'; j++, i++) {
+		dst[i] = src[j];
+	}
+	dst[i] = '\0';
+	return dst;
+}
