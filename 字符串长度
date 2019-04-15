@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+// 字符串长度
+int StrLen(const char *str);
+
+int main()
+{
+    char a[1024];
+    int n;
+    gets(a);
+    n = StrLen(a);
+    printf("%d\n", n);
+    return 0;
+}
+
+/* 你提交的代码将被嵌在这里 */
+
+int StrLen(const char *str){
+	int count=0;
+	int i = 0;
+	for (; str[i] != '\0'; i++) {
+		count++;
+	}
+	return count;
+}
