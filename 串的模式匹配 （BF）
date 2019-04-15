@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+int BF(struct sqstring *s, struct sqstring *t);
+struct sqstring {
+	char str[1000000];
+	int length;
+};
+int main() {
+	struct sqstring *s, *t;
+	s = (struct sqstring *)malloc(sizeof(struct sqstring));
+	t = (struct sqstring *)malloc(sizeof(struct sqstring));
+	scanf("%s",s->str);
+	scanf("%s",t->str);
+	int n;
+	s->length = strlen(s->str);
+	t->length = strlen(t->str);
+	n = BF(s, t);
+	printf("%d", n);
+}
+int BF(struct sqstring *s, struct sqstring *t) {
+	int i = 0, j = 0;
+	while (i < s->length&&j < t->length) {
+		if (s->str[i] == t->str[j]) {
+			i++;
+			j++;
+		}
+		else {
+			i = i - j + 1;
+			j = 0;
+		}
+	}
+	if (j >= t->length)
+		return i - t->length+1;
+	else
+		return 0;
+}
