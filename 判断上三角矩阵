@@ -1,0 +1,36 @@
+#include <stdio.h>
+#define TY 10
+int main(int argc, const char * argv[]) {
+    int T,n,i,h,l,j,p;
+    int bpd[TY][TY];
+    scanf("%d",&T);
+    for(i=1;i<=T;i++)
+    {
+        scanf("%d",&n);
+
+
+        for(h=0;h<=n-1;h++)
+        {
+            for(l=0;l<=n-1;l++)
+                scanf("%d",&bpd[h][l]);
+        }
+        j=0;
+        p=1;
+        for(h=1;h<=n-1;h++)
+        {
+            for(l=0;l<=j;l++)
+            {
+                if(bpd[h][l]!=0)
+                    p=0;
+                p=p*1;
+            }
+            j++;
+        }
+        if(p==1)
+            printf("YES\n");
+        if(p==0)
+            printf("NO\n");
+        }
+
+    return 0;
+}
