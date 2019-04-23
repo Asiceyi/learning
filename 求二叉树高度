@@ -1,0 +1,12 @@
+int GetHeight( BinTree BT )
+{
+    int LD,RD;
+    if(BT == NULL){
+        return 0;
+    }
+    else{
+        LD = GetHeight(BT->Left);
+        RD = GetHeight(BT->Right);
+        return (LD>RD?LD:RD)+1;
+    }
+}
