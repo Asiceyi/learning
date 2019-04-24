@@ -1,0 +1,11 @@
+int SqInsert(SqList &L,ElemType e){
+	if(L.length==MAXSIZE)
+  		return 0;
+	int i=0,j=0;
+	for(i=L.length-1;L.elem[i]>e;i--){
+		L.elem[i+1]=L.elem[i];
+	}
+	L.elem[i+1]=e;
+	L.length++;
+	return 1;
+}
