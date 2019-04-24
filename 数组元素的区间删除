@@ -1,0 +1,10 @@
+int Delete(int A[], int L, int minA, int maxA) {
+	int k = 0, i;
+	for (i = 0; i < L; i++) {
+		if (A[i] <= minA||A[i] >= maxA) {
+			A[k] = A[i];
+			k++;
+		}
+	}
+	return k;
+}
