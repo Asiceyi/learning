@@ -1,0 +1,12 @@
+List ReadInput() {
+	List L;
+	L = (List)malloc(sizeof(struct LNode));
+	int n;
+	scanf("%d", &n);
+	int i = 1;
+	for (; i <= n; i++) {
+		scanf("%d", &L->Data[i]);
+	}
+	L->Last = n;
+	return L;
+}
