@@ -1,0 +1,66 @@
+void InitList(LinkList *&L) {
+	L = (LinkList*)malloc(sizeof(struct LNode));
+	L->next = NULL;
+}
+
+void DestroyList(LinkList *&L) {
+	LinkList *pre = L, *p = L->next;
+	while (p) {
+		free(pre);
+		pre = p;
+		p = p->next;
+	}
+	free(pre);
+}
+
+void DispList(LinkList *L) {//test
+	LinkList *p = L;
+	p = p->next;
+	while (p) {
+		printf("%c ", p->data);
+		p = p->next;
+	}
+	printf("\n");
+}
+
+bool ListInsert(LinkList *&L, int i, ElemType e) {
+	int j = 0;
+	LinkList *p = L, *s;
+	if (i <= 0)
+		return false;
+	while (j < i - 1 && p) {
+		j++;
+		p = p->next;
+	}
+	if (p == NULL) {
+		return false;
+	}
+	else {
+		s = (LinkList*)malloc(sizeof(struct LNode));
+		s->data = e;
+		s->next = p->next;
+		p->next = s;
+		return true;
+	}
+}
+
+bool ListDelete(LinkList *&L, int i, ElemType &e) {
+	int j=0;
+	LinkList *p = L, *q;
+	if (i <= 0) return false;
+	while (j < i - 1 && p) {
+		j++;
+		p = p->next;
+	}
+	if (p == NULL)
+		return false;
+	else {
+		q = p->next;
+		if (q == NULL)
+			return false;
+		e = q->data;
+		p->next = q->next;
+		free(q);
+		return true;
+	}
+}
