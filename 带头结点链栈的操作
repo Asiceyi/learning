@@ -1,0 +1,17 @@
+Status Push(LinkList L, ElemType e) {
+	LinkList temp;
+	temp = (LinkList)malloc(sizeof(LinkList));
+	temp->data = e, temp->next = L->next;
+	L->next = temp;
+	return OK;
+}
+
+Status Pop(LinkList L, ElemType *e) {
+	LinkList head;
+	if (L->next == NULL)
+		return ERROR;
+	head = L->next;
+	*e = head->data;
+	L->next = head->next;
+	return OK;
+}
