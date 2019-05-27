@@ -1,0 +1,9 @@
+void PreorderPrintLeaves(BinTree BT) {
+	if (BT) {
+		PreorderPrintLeaves(BT->Left);
+		if (BT->Left == NULL && BT->Right == NULL) {
+			printf(" %c", BT->Data);
+		}
+		PreorderPrintLeaves(BT->Right);
+	}
+}
