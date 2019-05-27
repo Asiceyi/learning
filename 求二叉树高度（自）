@@ -1,0 +1,14 @@
+int GetHeight(BinTree BT) {
+	int a, b;
+	if (BT==NULL) {
+		return 0;
+	}
+	else {
+		a = GetHeight(BT->Left);
+		b = GetHeight(BT->Right);
+		if (a > b)
+			return a + 1;
+		else
+			return b + 1;
+	}
+}
