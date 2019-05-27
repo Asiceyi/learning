@@ -1,28 +1,27 @@
-void CreateBTNode(BTNode *& b, char * str)
+void CreateBTNode(BTNode *&b, char *str)
 {
-	BTNode *p, *st[100];
-
-	int top = -1, j = 0, k;
+	BTNode *St[100], *p = NULL;
+	int top = -1, k, j = 0;
+	char ch;
 	b = NULL;
-	char ch = str[j];
-	while (ch != '\0') {
-		switch (ch) {
-		case'(':
-			k = 1; top++; st[top] = p; break;
-		case')':
-			top--; break;
-		case',':
-			k = 2; break;
-		default:
-			p = (BTNode*)malloc(sizeof(BTNode));
-			p->data = ch;
+	ch = str[j];
+	while (ch != '\0')
+	{
+		switch (ch)
+		{
+		case '(':top++; St[top] = p; k = 1; break;
+		case ')':top--; break;
+		case ',':k = 2; break;
+		default:p = (BTNode *)malloc(sizeof(BTNode));
+			p->data = ch; p->lchild = p->rchild = NULL;
 			if (b == NULL)
 				b = p;
-			else {
+			else
+			{
 				switch (k)
 				{
-				case 1:st[top]->lchild = p; break;
-				case 2:st[top]->rchild = p; break;
+				case 1:St[top]->lchild = p; break;
+				case 2:St[top]->rchild = p; break;
 				}
 			}
 		}
