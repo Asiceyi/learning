@@ -1,0 +1,89 @@
+void CreateBTNode(BTNode *& b, char * str)
+{
+	BTNode *p, *st[100];
+
+	int top = -1, j = 0, k;
+	b = NULL;
+	char ch = str[j];
+	while (ch != '\0') {
+		switch (ch) {
+		case'(':
+			k = 1; top++; st[top] = p; break;
+		case')':
+			top--; break;
+		case',':
+			k = 2; break;
+		default:
+			p = (BTNode*)malloc(sizeof(BTNode));
+			p->data = ch;
+			if (b == NULL)
+				b = p;
+			else {
+				switch (k)
+				{
+				case 1:st[top]->lchild = p; break;
+				case 2:st[top]->rchild = p; break;
+				}
+			}
+		}
+		j++;
+		ch = str[j];
+	}
+}
+
+
+int BTNodeDepth(BTNode * b)
+{
+	int a, c;
+	if (b == NULL)
+		return 0;
+	else {
+		a = BTNodeDepth(b->lchild);
+		c = BTNodeDepth(b->rchild);
+		if (a > c)
+			return a + 1;
+		else
+			return c + 1;
+	}
+}
+
+void PreOrder(BTNode * b)
+{
+
+	if (b == NULL)return;
+	printf("%c ", b->data);
+	PreOrder(b->lchild);
+	PreOrder(b->rchild);
+}
+
+void InOrder(BTNode * b)
+{
+	if (b == NULL)return;
+	InOrder(b->lchild);
+	printf("%c ", b->data);
+	InOrder(b->rchild);
+}
+
+void PostOrder(BTNode * b)
+{
+	if (b == NULL)return;
+	PostOrder(b->lchild);
+	PostOrder(b->rchild);
+	printf("%c ", b->data);
+}
+
+void TravLevel(BTNode * b)
+{
+	if (b == NULL)return;
+	int head = 0, last = 0;
+	BTNode *tree[100];
+	tree[last++] = b;
+	while (head < last) {
+		BTNode *temp = tree[head++];
+		printf("%c ", temp->data);
+		if (temp->lchild)
+			tree[last++] = temp->lchild;
+		if (temp->rchild)
+			tree[last++] = temp->rchild;
+	}
+}
