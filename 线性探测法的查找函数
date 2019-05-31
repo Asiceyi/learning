@@ -1,0 +1,17 @@
+Position Find(HashTable H, ElementType Key) {
+	int hashpos = Hash(Key, H->TableSize);
+	int pre;
+	if (hashpos > 0) {
+		pre = hashpos - 1;
+	}
+	else {
+		pre = hashpos - 1 + H->TableSize;
+	}
+	for (; H->Cells[hashpos].Info != Empty && hashpos != pre; hashpos = (hashpos + 1) % H->TableSize)
+		if (H->Cells[hashpos].Data == Key && H->Cells[hashpos].Info == Legitimate)
+			return hashpos;
+	if (H->Cells[hashpos].Info == Empty)
+		return hashpos;
+	else
+		return ERROR;
+}
