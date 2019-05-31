@@ -1,0 +1,24 @@
+bool Delete(HashTable H, ElementType Key) {
+	int haspos = Hash(Key, H->TableSize);
+	Position p = H->Heads[haspos].Next, q = NULL;
+	if (p == NULL)
+		return false;
+	if (!strcmp(p->Data, Key)) {
+		H->Heads[haspos].Next = p->Next;
+		printf("%s is deleted from list Heads[%d]", Key, haspos);
+		return true;
+	}
+	q = p;
+	p = p->Next;
+	while (p) {
+		if (!strcmp(p->Data, Key)) {
+			q->Next = p->Next;
+			p->Next = NULL;
+			printf("%s is deleted from list Heads[%d]", Key, haspos);
+			return true;
+		}
+		q = p;
+		p = p->Next;
+	}
+	return false;
+}
