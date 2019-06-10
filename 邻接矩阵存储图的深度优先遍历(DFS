@@ -1,0 +1,10 @@
+void DFS(MGraph Graph, Vertex V, void(*Visit)(Vertex)) {
+	int i;
+	Visited[V] = 1;
+	Visit(V);
+	for (i = 0; i < Graph->Nv; i++) {
+		if (Visited[i] == 0 && Graph->G[V][i]==1)
+			DFS(Graph, i, Visit);
+	}
+	return;
+}
